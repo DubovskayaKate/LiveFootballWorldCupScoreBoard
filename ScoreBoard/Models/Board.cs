@@ -1,4 +1,5 @@
-﻿using ScoreBoard.Interfaces;
+﻿using System.Linq;
+using ScoreBoard.Interfaces;
 
 namespace ScoreBoard.Models
 {
@@ -8,12 +9,12 @@ namespace ScoreBoard.Models
 
         public void AddMatch(Match match)
         {
-            throw new NotImplementedException();
+            matches.Add(match);
         }
 
         public IList<Match> GetAcviteMatches()
         {
-            throw new NotImplementedException();
+            return matches.Where(match => match.Status is Status.InProgress or Status.Scheduled).OrderBy(match => match.TotalScore).ThenByDescending(match => match.MatchDate).ToList();
         }
     }
 }

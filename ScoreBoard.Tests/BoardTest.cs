@@ -41,7 +41,7 @@ namespace ScoreBoardTests
             var activeMatches = _board.GetAcviteMatches();
 
             activeMatches.Should().HaveCount(2);
-            activeMatches.First().Should().Be(match);
+            activeMatches.Should().BeEquivalentTo(new List<Match> { match2, match });
         }
 
         [Test]

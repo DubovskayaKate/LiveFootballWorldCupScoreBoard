@@ -47,6 +47,15 @@ namespace ScoreBoard.Tests
         }
 
         [Test]
+        public void StartAlreadyFinishedMatch_ThrowException()
+        {
+            _match.StartMatch();
+            _match.FinishMatch();
+            var action = () => _match.StartMatch();
+            action.Should().Throw<ValidationException>().WithMessage("Already finished match can't be started");
+        }
+
+        [Test]
         public void FinishScheduledMatch_ThrowException()
         {
             var action = () => _match.FinishMatch();
@@ -97,7 +106,7 @@ namespace ScoreBoard.Tests
             _match.AddGoalToTeam("homeTeam");
             _match.AddGoalToTeam("awayTeam");
 
-            _match.TotalSctore.Should().Be(5);
+            _match.TotalScore.Should().Be(5);
             _match.HomeTeam.Score.Should().Be(3);
             _match.AwayTeam.Score.Should().Be(2);
         }
