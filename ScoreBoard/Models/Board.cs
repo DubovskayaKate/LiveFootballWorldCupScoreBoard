@@ -6,11 +6,6 @@ namespace ScoreBoard.Models
     {
         private List<Match> matches = new List<Match>();
 
-        public void AddGoalToTeam(int matchId, string teamName)
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddMatch(Match match)
         {
             throw new NotImplementedException();

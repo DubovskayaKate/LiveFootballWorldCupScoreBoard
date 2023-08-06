@@ -2,7 +2,8 @@
 {
     public interface IMatch
     {
-        public void StartMatch(int matchId);
-        public void FinishMatch(int matchId);
+        public void StartMatch();
+        public void FinishMatch();
+        public void AddGoalToTeam(string teamName);
     }
 }

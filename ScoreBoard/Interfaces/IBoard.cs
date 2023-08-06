@@ -6,6 +6,5 @@ namespace ScoreBoard.Interfaces
     {
         public void AddMatch(Match match);
         public IList<Match> GetAcviteMatches();
-        public void AddGoalToTeam(int matchId, string teamName);
     }
 }
