@@ -6,7 +6,7 @@ namespace ScoreBoard.Models
     public class Match : IMatch
     {
         public Guid MatchId { get; private set; }
-        public DateTime MatchDate { get; private set; }
+        public DateTime MatchDateTime { get; private set; }
         public Team HomeTeam { get; private set; }
         public Team AwayTeam { get; private set; }
         public Status Status { get; private set; }
@@ -16,7 +16,7 @@ namespace ScoreBoard.Models
         public Match(DateTime matchDate, string homeTeamName, string awayTeamName)
         {
             MatchId = Guid.NewGuid();
-            MatchDate = matchDate;
+            MatchDateTime = matchDate;
             HomeTeam = new Team(homeTeamName);
             AwayTeam = new Team(awayTeamName);
             Status = Status.Scheduled;
@@ -44,15 +44,15 @@ namespace ScoreBoard.Models
             }
         }
 
-        public void AddGoalToTeam(string teamName)
+        public void UpdateScore(int homeTeamScore, int awayTeamScore)
         {
             switch (Status)
             {
                 case Status.Scheduled: throw new ValidationException("Not possible to add goal for scheduled match");
                 case Status.InProgress:
                     {
-                        if (!(HomeTeam.AddGoalToTeam(teamName) || AwayTeam.AddGoalToTeam(teamName)))
-                            throw new ValidationException("Name of the team is inmccorect");
+                        HomeTeam.Score = homeTeamScore; ;
+                        AwayTeam.Score = awayTeamScore;
                         return;
                     }
                 case Status.Finished: throw new ValidationException("Not possible to add goal for not finished match");

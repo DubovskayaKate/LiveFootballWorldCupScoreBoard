@@ -23,6 +23,8 @@ namespace ScoreBoardTests
         {
             var match = new Match(new DateTime(2023, 1, 1), "homeTeam", "awayTeam");
             _board.AddMatch(match);
+            match.StartMatch();
+
             var activeMatches = _board.GetAcviteMatches();
 
             activeMatches.Should().HaveCount(1);
@@ -37,6 +39,9 @@ namespace ScoreBoardTests
 
             _board.AddMatch(match2);
             _board.AddMatch(match);
+
+            match.StartMatch();
+            match2.StartMatch();
 
             var activeMatches = _board.GetAcviteMatches();
 
@@ -60,6 +65,18 @@ namespace ScoreBoardTests
         }
 
         [Test]
+        public void AddMatch_ScheduledMatch_MatchAreNotInTheList()
+        {
+            var match = new Match(new DateTime(2023, 1, 1), "homeTeam", "awayTeam");
+
+            _board.AddMatch(match);
+
+            var activeMatches = _board.GetAcviteMatches();
+
+            activeMatches.Should().HaveCount(0);
+        }
+
+        [Test]
         public void AddMultipleMatches_MatchAreInTheListInCorrectOrder()
         {
             var match = new Match(new DateTime(2023, 1, 1), "homeTeam", "awayTeam");
@@ -67,18 +84,18 @@ namespace ScoreBoardTests
             var match3 = new Match(new DateTime(2023, 1, 1), "homeTeam", "awayTeam");
 
             match.StartMatch();
-            match.AddGoalToTeam("homeTeam");
-            match.AddGoalToTeam("homeTeam");
-            match.AddGoalToTeam("awayTeam");
+            match.UpdateScore(1, 0);
+            match.UpdateScore(2, 0);
+            match.UpdateScore(2, 1);
 
             match2.StartMatch();
-            match2.AddGoalToTeam("homeTeam");
-            match2.AddGoalToTeam("homeTeam");
-            match2.AddGoalToTeam("awayTeam");
+            match.UpdateScore(1, 0);
+            match.UpdateScore(2, 0);
+            match.UpdateScore(2, 1);
 
             match3.StartMatch();
-            match3.AddGoalToTeam("homeTeam");
-            match3.AddGoalToTeam("awayTeam");
+            match.UpdateScore(1, 0);
+            match.UpdateScore(1, 1);
 
             _board.AddMatch(match);
             _board.AddMatch(match2);

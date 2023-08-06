@@ -74,7 +74,7 @@ namespace ScoreBoard.Tests
         [Test]
         public void AddGoalForScheduledMatch_ThrowException()
         {
-            var action = () => _match.AddGoalToTeam("homeTeam");
+            var action = () => _match.UpdateScore(1, 0);
             action.Should().Throw<ValidationException>().WithMessage("Not possible to add goal for scheduled match");
         }
 
@@ -83,7 +83,7 @@ namespace ScoreBoard.Tests
         {
             _match.StartMatch();
             _match.FinishMatch();
-            var action = () => _match.AddGoalToTeam("homeTeam");
+            var action = () => _match.UpdateScore(1, 0);
             action.Should().Throw<ValidationException>().WithMessage("Not possible to add goal for not finished match");
         }
 
@@ -91,7 +91,7 @@ namespace ScoreBoard.Tests
         public void AddGoalForNotExistingTeam_ThrowException()
         {
             _match.StartMatch();
-            var action = () => _match.AddGoalToTeam("otherTeam");
+            var action = () => _match.UpdateScore(0, 1);
             action.Should().Throw<ValidationException>().WithMessage("Name of the team is inmccorect");
         }
 
@@ -100,11 +100,11 @@ namespace ScoreBoard.Tests
         {
             _match.StartMatch();
 
-            _match.AddGoalToTeam("homeTeam");
-            _match.AddGoalToTeam("awayTeam");
-            _match.AddGoalToTeam("homeTeam");
-            _match.AddGoalToTeam("homeTeam");
-            _match.AddGoalToTeam("awayTeam");
+            _match.UpdateScore(1, 0);
+            _match.UpdateScore(1, 1);
+            _match.UpdateScore(2, 1);
+            _match.UpdateScore(3, 1);
+            _match.UpdateScore(3, 2);
 
             _match.TotalScore.Should().Be(5);
             _match.HomeTeam.Score.Should().Be(3);

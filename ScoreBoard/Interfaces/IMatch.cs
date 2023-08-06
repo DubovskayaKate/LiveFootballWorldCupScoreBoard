@@ -4,6 +4,6 @@
     {
         public void StartMatch();
         public void FinishMatch();
-        public void AddGoalToTeam(string teamName);
+        public void UpdateScore(int homeTeamScore, int awayTeamScore);
     }
 }
