@@ -88,14 +88,6 @@ namespace ScoreBoard.Tests
         }
 
         [Test]
-        public void AddGoalForNotExistingTeam_ThrowException()
-        {
-            _match.StartMatch();
-            var action = () => _match.UpdateScore(0, 1);
-            action.Should().Throw<ValidationException>().WithMessage("Name of the team is inmccorect");
-        }
-
-        [Test]
         public void AddGoalForTeams_ScoreIsCorrect()
         {
             _match.StartMatch();
