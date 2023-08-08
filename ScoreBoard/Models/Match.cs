@@ -51,7 +51,7 @@ namespace ScoreBoard.Models
                 case Status.Scheduled: throw new ValidationException("Not possible to add goal for scheduled match");
                 case Status.InProgress:
                     {
-                        HomeTeam.Score = homeTeamScore; ;
+                        HomeTeam.Score = homeTeamScore;
                         AwayTeam.Score = awayTeamScore;
                         return;
                     }

@@ -14,7 +14,11 @@ namespace ScoreBoard.Models
 
         public IList<Match> GetAcviteMatches()
         {
-            return matches.Where(match => match.Status is Status.InProgress).OrderBy(match => match.TotalScore).ThenByDescending(match => match.MatchDateTime).ToList();
+            return matches
+                .Where(match => match.Status is Status.InProgress)
+                .OrderBy(match => match.TotalScore)
+                .ThenByDescending(match => match.MatchDateTime)
+                .ToList();
         }
     }
 }

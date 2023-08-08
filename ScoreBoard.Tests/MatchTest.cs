@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using ScoreBoard.Models;
-using ScoreBoard.Interfaces;
 using System;
 using FluentAssertions;
 using System.ComponentModel.DataAnnotations;
