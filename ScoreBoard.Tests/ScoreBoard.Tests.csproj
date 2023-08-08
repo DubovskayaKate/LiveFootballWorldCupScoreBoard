@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScoreBoard.csproj" />
+    <ProjectReference Include="..\ScoreBoard\ScoreBoard.csproj" />
   </ItemGroup>
 
 </Project>
